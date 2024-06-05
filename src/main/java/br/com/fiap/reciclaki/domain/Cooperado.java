@@ -16,7 +16,7 @@ public class Cooperado {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_cooperado")
-    @Column(name = "id_cooperado")
+    @Column(name = "cd_cooperado")
     private Long id;
 
     @Column(name = "nm_cooperado", nullable = false, length = 50)
@@ -26,7 +26,7 @@ public class Cooperado {
     @JoinColumn(name="cd_endereco")
     private Endereco endereco;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne (cascade=CascadeType.ALL)
     @JoinColumn(name="cd_cooperativa")
     private Cooperativa cooperativa;
 

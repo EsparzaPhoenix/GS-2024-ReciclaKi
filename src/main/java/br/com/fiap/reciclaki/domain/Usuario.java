@@ -16,13 +16,13 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_usuario")
-    @Column(name = "id_usuario")
+    @Column(name = "cd_usuario")
     private Long id;
 
     @Column(name = "nm_usuario", nullable = false, length = 50)
     private String nome;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="cd_endereco")
     private Endereco endereco;
 

@@ -26,6 +26,6 @@ public class Endereco {
     private String cep;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="cd_cidade")
+    @JoinColumn(name="cd_cidade", nullable = false)
     private Cidade cidade;
 }

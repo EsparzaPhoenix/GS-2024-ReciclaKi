@@ -1,5 +1,6 @@
 package br.com.fiap.reciclaki.domain;
 
+import br.com.fiap.reciclaki.domain.enums.TipoMaterial;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +17,12 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_produto")
-    @Column(name = "id_produto")
+    @Column(name = "cd_produto")
     private Long id;
+
+    @Column(name = "tp_material",nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private TipoMaterial tipoMaterial;
 
     @Column(name = "nm_produto", nullable = false, length = 50)
     private String nome;
