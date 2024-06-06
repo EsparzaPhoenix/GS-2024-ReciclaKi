@@ -1,6 +1,5 @@
 package br.com.fiap.reciclaki.domain;
 
-
 import br.com.fiap.reciclaki.dto.cooperativa.AtualizacaoCooperativa;
 import br.com.fiap.reciclaki.dto.cooperativa.CadastroCooperativaDTO;
 import jakarta.persistence.*;
