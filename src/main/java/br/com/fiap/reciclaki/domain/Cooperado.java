@@ -1,5 +1,7 @@
 package br.com.fiap.reciclaki.domain;
 
+import br.com.fiap.reciclaki.dto.cooperado.AtualizacaoCooperadoDTO;
+import br.com.fiap.reciclaki.dto.cooperado.CadastroCooperadoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +24,9 @@ public class Cooperado {
     @Column(name = "nm_cooperado", nullable = false, length = 50)
     private String nome;
 
+    @Column(name = "email_cooperado", nullable = false, length = 70)
+    private String email;
+
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="cd_endereco")
     private Endereco endereco;
@@ -30,4 +35,14 @@ public class Cooperado {
     @JoinColumn(name="cd_cooperativa")
     private Cooperativa cooperativa;
 
+    public Cooperado(CadastroCooperadoDTO dto) {
+        nome = dto.nome();
+        email = dto.email();
+        endereco = new Endereco(dto.endereco());
+    }
+
+    public void atualizar(AtualizacaoCooperadoDTO dto) {
+        if(dto.nome() != null)
+            nome = dto.nome();
+    }
 }

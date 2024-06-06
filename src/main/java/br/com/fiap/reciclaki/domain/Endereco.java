@@ -1,5 +1,7 @@
 package br.com.fiap.reciclaki.domain;
 
+import br.com.fiap.reciclaki.dto.endereco.AtualizacaoEnderecoDTO;
+import br.com.fiap.reciclaki.dto.endereco.CadastroEnderecoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +30,16 @@ public class Endereco {
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="cd_cidade", nullable = false)
     private Cidade cidade;
+
+    public Endereco(CadastroEnderecoDTO dto) {
+        logradouro = dto.logradouro();
+        cep = dto.cep();
+    }
+
+    public void atualizar(AtualizacaoEnderecoDTO dto) {
+        if(dto.logradouro() != null)
+            logradouro = dto.logradouro();
+        if(dto.cep() != null)
+            cep = dto.cep();
+    }
 }

@@ -4,7 +4,6 @@ import br.com.fiap.reciclaki.dto.endereco.CadastroEnderecoDTO;
 
 public record AtualizacaoCooperadoDTO(
         String nome,
-        CadastroEnderecoDTO endereco,
-        Long cooperativaId
+        String email
 ) {
 }

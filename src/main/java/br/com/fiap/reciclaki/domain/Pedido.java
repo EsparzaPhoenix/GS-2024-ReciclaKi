@@ -1,6 +1,8 @@
 package br.com.fiap.reciclaki.domain;
 
 import br.com.fiap.reciclaki.domain.enums.Status;
+import br.com.fiap.reciclaki.dto.pedido.AtualizacaoPedidoDTO;
+import br.com.fiap.reciclaki.dto.pedido.CadastroPedidoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +24,11 @@ public class Pedido {
     private Long id;
 
     @Column(name ="qtd_itens")
-    private int quantidade;
+    private Integer quantidade;
+
+    @Column(name ="peso_pedido")
+    private Float pesoPedido;
+    //peso total em kilos dos produtos a serem reciclados
 
     @Column(name="dt_pedido", nullable=false)
     private LocalDate dataPedido;
@@ -43,4 +49,21 @@ public class Pedido {
     @JoinColumn(name ="cd_cooperativa", nullable = false)
     private Cooperativa cooperativa;
 
+    public Pedido(CadastroPedidoDTO dto) {
+        quantidade = dto.quantidade();
+        pesoPedido = dto.pesoPedido();
+        dataPedido = dto.dataPedido();
+        status = dto.status();
+    }
+
+    public void atualizar(AtualizacaoPedidoDTO dto) {
+        if(dto.quantidade() != null)
+            quantidade = dto.quantidade();
+        if(dto.pesoPedido() != null)
+            pesoPedido = dto.pesoPedido();
+        if(dto.dataPedido() != null)
+            dataPedido = dto.dataPedido();
+        if(dto.status() != null)
+            status = dto.status();
+    }
 }

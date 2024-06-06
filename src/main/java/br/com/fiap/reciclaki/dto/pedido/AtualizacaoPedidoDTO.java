@@ -6,7 +6,8 @@ import br.com.fiap.reciclaki.dto.endereco.CadastroEnderecoDTO;
 import java.time.LocalDate;
 
 public record AtualizacaoPedidoDTO(
-        int quantidade,
+        Integer quantidade,
+        Float pesoPedido,
         LocalDate dataPedido,
         Status status,
         Long produtoId,

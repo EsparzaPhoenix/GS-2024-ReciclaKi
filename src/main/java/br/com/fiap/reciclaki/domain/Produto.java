@@ -1,6 +1,8 @@
 package br.com.fiap.reciclaki.domain;
 
 import br.com.fiap.reciclaki.domain.enums.TipoMaterial;
+import br.com.fiap.reciclaki.dto.produto.AtualizacaoProdutoDTO;
+import br.com.fiap.reciclaki.dto.produto.CadastroProdutoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,4 +28,16 @@ public class Produto {
 
     @Column(name = "nm_produto", nullable = false, length = 50)
     private String nome;
+
+    public Produto(CadastroProdutoDTO dto) {
+        tipoMaterial = dto.tipoMaterial();
+        nome = dto.nome();
+    }
+
+    public void atualizar(AtualizacaoProdutoDTO dto) {
+        if(dto.tipoMaterial() != null)
+            tipoMaterial = dto.tipoMaterial();
+        if(dto.nome() != null)
+            nome = dto.nome();
+    }
 }

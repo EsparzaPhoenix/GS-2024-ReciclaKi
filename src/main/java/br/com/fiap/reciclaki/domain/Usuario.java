@@ -1,5 +1,7 @@
 package br.com.fiap.reciclaki.domain;
 
+import br.com.fiap.reciclaki.dto.usuario.AtualizacaoUsuarioDTO;
+import br.com.fiap.reciclaki.dto.usuario.CadastroUsuarioDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,5 +33,21 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name="cd_endereco")
     private Endereco endereco;
+
+    public Usuario(CadastroUsuarioDTO dto) {
+        email = dto.email();
+        numeroTelefone = dto.numeroTelefone();
+        nome = dto.nome();
+        endereco = new Endereco(dto.endereco());
+    }
+
+    public void atualizar(AtualizacaoUsuarioDTO dto) {
+        if (dto.email() != null)
+            email = dto.email();
+        if(dto.numeroTelefone() != null)
+            numeroTelefone = dto.numeroTelefone();
+        if(dto.nome() != null)
+            nome = dto.nome();
+    }
 
 }
