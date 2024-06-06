@@ -19,6 +19,12 @@ public class Usuario {
     @Column(name = "cd_usuario")
     private Long id;
 
+    @Column(name = "email_usuario", nullable = false, length = 70)
+    private String email;
+
+    @Column(name = "nr_telefone", length = 11, nullable = false)
+    private String numeroTelefone;
+
     @Column(name = "nm_usuario", nullable = false, length = 50)
     private String nome;
 
