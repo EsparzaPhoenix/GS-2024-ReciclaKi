@@ -5,6 +5,7 @@ import br.com.fiap.reciclaki.domain.Endereco;
 import br.com.fiap.reciclaki.dto.cooperado.AtualizacaoCooperadoDTO;
 import br.com.fiap.reciclaki.dto.cooperado.CadastroCooperadoDTO;
 import br.com.fiap.reciclaki.dto.cooperado.DetalhesCooperadoDTO;
+import br.com.fiap.reciclaki.dto.endereco.DetalhesEnderecoDTO;
 import br.com.fiap.reciclaki.repositories.CidadeRepository;
 import br.com.fiap.reciclaki.repositories.CooperadoRepository;
 import br.com.fiap.reciclaki.repositories.CooperativaRepository;
@@ -54,6 +55,12 @@ public class CooperadoController {
     public ResponseEntity<Page<DetalhesCooperadoDTO>> pesquisar(Pageable pageable){
         var page = cooperadoRepository.findAll(pageable).map(DetalhesCooperadoDTO::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesCooperadoDTO> pesquisar(@PathVariable("id") Long id) {
+        var endereco = new DetalhesCooperadoDTO(cooperadoRepository.getReferenceById(id));
+        return ResponseEntity.ok(endereco);
     }
 
     @PutMapping("/{id}")

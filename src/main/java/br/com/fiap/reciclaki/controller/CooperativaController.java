@@ -2,6 +2,7 @@ package br.com.fiap.reciclaki.controller;
 
 import br.com.fiap.reciclaki.domain.Cooperativa;
 import br.com.fiap.reciclaki.domain.Endereco;
+import br.com.fiap.reciclaki.dto.cooperado.DetalhesCooperadoDTO;
 import br.com.fiap.reciclaki.dto.cooperativa.AtualizacaoCooperativa;
 import br.com.fiap.reciclaki.dto.cooperativa.CadastroCooperativaDTO;
 import br.com.fiap.reciclaki.dto.cooperativa.DetalhesCooperativaDTO;
@@ -48,6 +49,12 @@ public class CooperativaController {
     public ResponseEntity<Page<DetalhesCooperativaDTO>> pesquisar(Pageable pageable){
         var page = cooperativaRepository.findAll(pageable).map(DetalhesCooperativaDTO::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesCooperativaDTO> pesquisar(@PathVariable("id") Long id) {
+        var endereco = new DetalhesCooperativaDTO(cooperativaRepository.getReferenceById(id));
+        return ResponseEntity.ok(endereco);
     }
 
     @PutMapping("/{id}")
