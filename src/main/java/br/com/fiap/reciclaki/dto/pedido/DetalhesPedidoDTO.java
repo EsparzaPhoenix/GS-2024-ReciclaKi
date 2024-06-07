@@ -13,7 +13,7 @@ public record DetalhesPedidoDTO(
         LocalDate dataPedido,
         Status status,
         Long produtoId,
-        DetalhesEnderecoDTO endereco,
+        Long enderecoId,
         Long cooperativaId
 ) {
     public DetalhesPedidoDTO(Pedido pedido) {
@@ -24,7 +24,7 @@ public record DetalhesPedidoDTO(
                 pedido.getDataPedido(),
                 pedido.getStatus(),
                 pedido.getProduto().getId(),
-                new DetalhesEnderecoDTO(pedido.getEndereco()),
+                pedido.getEndereco().getId(),
                 pedido.getCooperativa().getId()
         );
     }

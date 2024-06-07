@@ -11,7 +11,7 @@ public record CadastroPedidoDTO(
         LocalDate dataPedido,
         Status status,
         Long produtoId,
-        CadastroEnderecoDTO endereco,
+        Long enderecoId,
         Long cooperativaId
 ) {
 }

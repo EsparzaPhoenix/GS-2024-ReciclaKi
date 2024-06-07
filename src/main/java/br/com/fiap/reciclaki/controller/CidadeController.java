@@ -1,6 +1,7 @@
 package br.com.fiap.reciclaki.controller;
 
 import br.com.fiap.reciclaki.domain.Cidade;
+import br.com.fiap.reciclaki.dto.cidade.AtualizacaoCidadeDTO;
 import br.com.fiap.reciclaki.dto.cidade.CadastroCidadeDTO;
 import br.com.fiap.reciclaki.dto.cidade.DetalhesCidadeDTO;
 import br.com.fiap.reciclaki.repositories.CidadeRepository;
@@ -36,8 +37,24 @@ public class CidadeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DetalhesCidadeDTO> pesquisar(@PathVariable("id") Long id){
-        var cidade = new DetalhesCidadeDTO(cidadeRepository.getReferenceById(id));
-        return ResponseEntity.ok(cidade);
+    public ResponseEntity<DetalhesCidadeDTO> pesquisar(@PathVariable("id") Long id) {
+        var pedido = new DetalhesCidadeDTO(cidadeRepository.getReferenceById(id));
+        return ResponseEntity.ok(pedido);
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DetalhesCidadeDTO> atualizar(@PathVariable("id") Long id, @RequestBody @Valid AtualizacaoCidadeDTO dto) {
+        var pedido = cidadeRepository.getReferenceById(id);
+        pedido.atualizar(dto);
+        return ResponseEntity.ok(new DetalhesCidadeDTO(pedido));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> remover(@PathVariable("id") Long id){
+        cidadeRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

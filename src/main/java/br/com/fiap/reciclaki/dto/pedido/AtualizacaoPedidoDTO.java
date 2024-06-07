@@ -1,7 +1,6 @@
 package br.com.fiap.reciclaki.dto.pedido;
 
 import br.com.fiap.reciclaki.domain.enums.Status;
-import br.com.fiap.reciclaki.dto.endereco.CadastroEnderecoDTO;
 
 import java.time.LocalDate;
 
@@ -11,7 +10,7 @@ public record AtualizacaoPedidoDTO(
         LocalDate dataPedido,
         Status status,
         Long produtoId,
-        CadastroEnderecoDTO endereco,
+        Long enderecoId,
         Long cooperativaId
 ) {
 }

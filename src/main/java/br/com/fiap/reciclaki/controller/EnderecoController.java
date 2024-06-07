@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,6 +20,7 @@ public class EnderecoController {
     private EnderecoRepository enderecoRepository;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<DetalhesEnderecoDTO> cadastrar(@RequestBody CadastroEnderecoDTO dto, UriComponentsBuilder uriBuilder) {
         var endereco = new Endereco(dto);
         enderecoRepository.save(endereco);
@@ -38,5 +40,11 @@ public class EnderecoController {
         return ResponseEntity.ok(endereco);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> remover(@PathVariable("id") Long id){
+        enderecoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

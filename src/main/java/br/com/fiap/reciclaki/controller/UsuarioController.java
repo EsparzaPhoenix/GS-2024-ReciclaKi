@@ -2,6 +2,9 @@ package br.com.fiap.reciclaki.controller;
 
 import br.com.fiap.reciclaki.domain.Endereco;
 import br.com.fiap.reciclaki.domain.Usuario;
+import br.com.fiap.reciclaki.dto.produto.AtualizacaoProdutoDTO;
+import br.com.fiap.reciclaki.dto.produto.DetalhesProdutoDTO;
+import br.com.fiap.reciclaki.dto.usuario.AtualizacaoUsuarioDTO;
 import br.com.fiap.reciclaki.dto.usuario.CadastroUsuarioDTO;
 import br.com.fiap.reciclaki.dto.usuario.DetalhesUsuarioDTO;
 import br.com.fiap.reciclaki.repositories.CidadeRepository;
@@ -33,16 +36,11 @@ public class UsuarioController {
     @Transactional
     public ResponseEntity<DetalhesUsuarioDTO> cadastrar(@RequestBody @Valid CadastroUsuarioDTO dto, UriComponentsBuilder builder) {
         var usuario = new Usuario(dto);
-        // Buscar a cidade no banco de dados
         var cidade = cidadeRepository.getReferenceById(dto.endereco().cidadeId());
-        // Criar o Endereço e associar a cidade
         var endereco = new Endereco(dto.endereco());
         endereco.setCidade(cidade);
-        // Salvar o Endereço antes de associá-lo ao Usuario
         enderecoRepository.save(endereco);
-        // Associar o Endereço ao Usuario
         usuario.setEndereco(endereco);
-        // Salvar o Usuario
         usuario = usuarioRepository.save(usuario);
         var uri = builder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(new DetalhesUsuarioDTO(usuario));
@@ -52,6 +50,33 @@ public class UsuarioController {
     public ResponseEntity<Page<DetalhesUsuarioDTO>> pesquisar(Pageable pageable){
         var page = usuarioRepository.findAll(pageable).map(DetalhesUsuarioDTO::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesUsuarioDTO> detalhar(@PathVariable Long id) {
+        var usuario = usuarioRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DetalhesUsuarioDTO(usuario));
+    }
+
+    @GetMapping("por-nome")
+    public ResponseEntity<Page<DetalhesUsuarioDTO>> buscar(@RequestParam("nome")String nome, Pageable pageable){
+        var lista = usuarioRepository.buscarPorNome(nome, pageable).map(DetalhesUsuarioDTO::new);
+        return ResponseEntity.ok(lista);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DetalhesUsuarioDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioDTO dto) {
+        var usuario = usuarioRepository.getReferenceById(id);
+        usuario.atualizar(dto);
+        return ResponseEntity.ok(new DetalhesUsuarioDTO(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> remover(@PathVariable Long id) {
+        usuarioRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

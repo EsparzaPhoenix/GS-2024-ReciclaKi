@@ -1,5 +1,5 @@
 package br.com.fiap.reciclaki.domain.enums;
 
 public enum Status {
-    EM_PROCESSAMENTO, A_CAMINHO, FINALIZADO
+    PENDENTE ,EM_PROCESSAMENTO, A_CAMINHO, FINALIZADO
 }
