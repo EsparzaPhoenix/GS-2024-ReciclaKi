@@ -4,7 +4,6 @@ import br.com.fiap.reciclaki.domain.Pedido;
 import br.com.fiap.reciclaki.dto.pedido.AtualizacaoPedidoDTO;
 import br.com.fiap.reciclaki.dto.pedido.CadastroPedidoDTO;
 import br.com.fiap.reciclaki.dto.pedido.DetalhesPedidoDTO;
-import br.com.fiap.reciclaki.dto.usuario.DetalhesUsuarioDTO;
 import br.com.fiap.reciclaki.repositories.CooperativaRepository;
 import br.com.fiap.reciclaki.repositories.EnderecoRepository;
 import br.com.fiap.reciclaki.repositories.PedidoRepository;

@@ -2,7 +2,6 @@ package br.com.fiap.reciclaki.controller;
 
 import br.com.fiap.reciclaki.domain.Produto;
 import br.com.fiap.reciclaki.domain.enums.TipoMaterial;
-import br.com.fiap.reciclaki.dto.pedido.DetalhesPedidoDTO;
 import br.com.fiap.reciclaki.dto.produto.CadastroProdutoDTO;
 import br.com.fiap.reciclaki.dto.produto.AtualizacaoProdutoDTO;
 import br.com.fiap.reciclaki.dto.produto.DetalhesProdutoDTO;

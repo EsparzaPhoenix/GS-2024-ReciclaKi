@@ -2,8 +2,6 @@ package br.com.fiap.reciclaki.controller;
 
 import br.com.fiap.reciclaki.domain.Endereco;
 import br.com.fiap.reciclaki.domain.Usuario;
-import br.com.fiap.reciclaki.dto.produto.AtualizacaoProdutoDTO;
-import br.com.fiap.reciclaki.dto.produto.DetalhesProdutoDTO;
 import br.com.fiap.reciclaki.dto.usuario.AtualizacaoUsuarioDTO;
 import br.com.fiap.reciclaki.dto.usuario.CadastroUsuarioDTO;
 import br.com.fiap.reciclaki.dto.usuario.DetalhesUsuarioDTO;
